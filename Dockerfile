@@ -12,7 +12,7 @@ RUN mkdir -p dist
 RUN dart compile exe bin/sunny.dart -o dist/app
 
 FROM scratch
-EXPOSE 3000
+EXPOSE 8080
 COPY --from=build /runtime/ /
 COPY --from=build /app/dist/app /app/bin/
 
