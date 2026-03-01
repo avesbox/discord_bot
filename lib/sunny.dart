@@ -124,6 +124,10 @@ Future<void> main() async {
     // You can do the exact same EmbedBuilder logic for 'pull_request' here!
     if (event == 'pull_request') {
       final action = data['action'];
+      if (action != 'opened' && action != 'closed' && action != 'reopened') {
+        print('Ignoring PR action: $action');
+        return 'Ignored PR action';
+      }
       final pr = data['pull_request'];
       final repoName = data['repository']['full_name'];
       final sender = data['sender'];
