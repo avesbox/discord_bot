@@ -84,6 +84,10 @@ Future<void> main() async {
 
     if (event == 'issues') {
       final action = data['action'];
+      if (action != 'opened' && action != 'closed' && action != 'reopened') {
+        print('Ignoring issue action: $action');
+        return 'Ignored issue action';
+      }
       final issue = data['issue'];
       final repoName = data['repository']['full_name'];
       final sender = data['sender'];
