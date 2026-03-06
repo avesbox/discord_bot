@@ -114,7 +114,10 @@ Future<void> main() async {
         url: Uri.parse(issue['html_url']), 
         
         // The actual markdown content from the GitHub issue
-        description: body, 
+        description: switch(issue['state']) {
+          'closed' => null, // Don't show body for closed issues to reduce clutter
+          _ => body,
+        },
         
         // The user who triggered the action
         author: EmbedAuthorBuilder(
